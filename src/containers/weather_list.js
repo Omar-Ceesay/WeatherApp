@@ -3,12 +3,9 @@ import {connect} from 'react-redux';
 
 import Graph from '../components/graphs';
 import GoogleMap from '../components/google_map';
-import Details from '../components/details';
+import CityName from '../components/city_name';
 
 class WeatherList extends Component {
-  moreInfo(){
-    
-  }
 
   renderWeather(cityData){
     const temps = cityData.list.map(weather => weather.main.temp);
@@ -16,14 +13,11 @@ class WeatherList extends Component {
     const humidity = cityData.list.map(weather => weather.main.humidity);
     const lon = cityData.city.coord.lon;
     const lat = cityData.city.coord.lat;
-
+    const detail = false;
     return(
-      <tr key={cityData.city.name}>
+      <tr key={cityData.city.id}>
         <td>
-          <p className="well well-sm info" onClick=this.moreInfo>
-            {cityData.city.name}
-          </p>
-          <Details ref="info"/>
+          <CityName cityData={cityData}/>
           <GoogleMap lat={lat} lon={lon} />
         </td>
         <td>
